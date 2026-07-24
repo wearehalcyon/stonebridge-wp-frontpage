@@ -1,1 +1,14 @@
 
+node_modules/
+*.css.map
+*.js.map
+
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.bak
+
+.env
+.env.local
