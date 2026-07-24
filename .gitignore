@@ -1,5 +1,6 @@
 
 node_modules/
+vendor/
 *.css.map
 *.js.map
 
