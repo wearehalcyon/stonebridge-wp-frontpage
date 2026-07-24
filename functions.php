@@ -10,6 +10,7 @@ function stonebridge_scripts() {
 	wp_style_add_data( 'stonebridge-style', 'rtl', 'replace' );
 
 	// Add main app styles
+	wp_enqueue_style( 'stonebridge-tailwind', get_template_directory_uri() . '/assets/css/tailwind.css?version=' . filemtime(get_template_directory() . '/assets/css/tailwind.css') );
 	wp_enqueue_style( 'stonebridge-app', get_template_directory_uri() . '/assets/scss/app.css?version=' . filemtime(get_template_directory() . '/assets/scss/app.css') );
 
 	// Add main app scripts
