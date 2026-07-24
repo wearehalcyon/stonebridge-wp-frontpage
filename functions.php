@@ -9,7 +9,11 @@ function stonebridge_scripts() {
 	wp_enqueue_style( 'stonebridge-style', get_stylesheet_uri(), array(), '' );
 	wp_style_add_data( 'stonebridge-style', 'rtl', 'replace' );
 
-	wp_enqueue_script( 'stonebridge-app', get_template_directory_uri() . '/assets/js/app.js', array(), '', true );
+	// Add main app styles
+	wp_enqueue_style( 'stonebridge-app', get_template_directory_uri() . '/assets/scss/app.css?version=' . filemtime(get_template_directory() . '/assets/scss/app.css') );
+
+	// Add main app scripts
+	wp_enqueue_script( 'stonebridge-app', get_template_directory_uri() . '/assets/js/app.js?version=' . filemtime(get_template_directory() . '/assets/js/app.js'), array(), '', true );
 }
 add_action( 'wp_enqueue_scripts', 'stonebridge_scripts' );
 
