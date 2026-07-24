@@ -1,1 +1,22 @@
+body.admin-bar header {
+  margin-top: 32px;
+}
+
+.primary-menu {
+  position: relative;
+}
+.primary-menu li {
+  display: inline-flex;
+  padding: 0 20px;
+}
+.primary-menu li a {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 200;
+  transition: all 0.2s ease-in-out;
+}
+.primary-menu li a:hover {
+  opacity: 0.7;
+}
+
 /*# sourceMappingURL=app.css.map */

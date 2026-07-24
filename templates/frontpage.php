@@ -4,8 +4,8 @@
  */
 get_header();
 ?>
-<div class="bg-red-600 p-4 text-white">
-    Hello World
-</div>
+	<div class="block relative z-1 min-h-[1000px]" style="background: url('<?php echo get_field('background'); ?>') no-repeat center; background-size: cover;">
+		123
+	</div>
 <?php
 get_footer();

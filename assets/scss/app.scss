@@ -1,0 +1,22 @@
+@import 'inc/_variables.scss';
+
+body.admin-bar header {
+    margin-top: 32px;
+}
+
+.primary-menu {
+    position: relative;
+    li{
+        display: inline-flex;
+        padding: 0 20px;
+        a{
+            color: $white;
+            font-size: 16px;
+            font-weight: 200;
+            transition: $transition;
+            &:hover{
+                opacity: .7;
+            }
+        }
+    }
+}
