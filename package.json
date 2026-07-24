@@ -1,0 +1,14 @@
+{
+    "name": "stonebridge",
+    "version": "1.0.0",
+    "description": "WordPress theme with Tailwind CSS integration",
+    "main": "index.php",
+    "scripts": {
+        "dev": "tailwindcss -i ./assets/css/src/tailwind.css -o ./assets/css/tailwind.css --watch",
+        "build": "tailwindcss -i ./assets/css/src/tailwind.css -o ./assets/css/tailwind.css --minify"
+    },
+    "license": "ISC",
+    "devDependencies": {
+        "tailwindcss": "^3.4.1"
+    }
+}
