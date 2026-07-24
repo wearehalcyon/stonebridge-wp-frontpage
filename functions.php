@@ -9,6 +9,9 @@ function stonebridge_scripts() {
 	wp_enqueue_style( 'stonebridge-style', get_stylesheet_uri(), array(), '' );
 	wp_style_add_data( 'stonebridge-style', 'rtl', 'replace' );
 
+	// Enqueue Google Fonts (DM Sans)
+	wp_enqueue_style( 'stonebridge-google-fonts', 'https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap', array(), null );
+
 	// Add main app styles
 	wp_enqueue_style( 'stonebridge-tailwind', get_template_directory_uri() . '/assets/css/tailwind.css?version=' . filemtime(get_template_directory() . '/assets/css/tailwind.css') );
 	wp_enqueue_style( 'stonebridge-app', get_template_directory_uri() . '/assets/scss/app.css?version=' . filemtime(get_template_directory() . '/assets/scss/app.css') );
