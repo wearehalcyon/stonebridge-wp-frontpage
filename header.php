@@ -31,7 +31,7 @@
                         ]);
                     ?>
                 </div>
-                <div class="col-span-6 md:col-span-9 lg:col-span-3 justify-self-end">
+                <div class="hidden lg:block col-span-6 md:col-span-9 lg:col-span-3 justify-self-end">
                     <?php if (get_field('cta_title', 'option') && get_field('cta_link', 'option')) : ?>
                         <a href="<?php the_field('cta_link', 'option'); ?>" title="<?php the_field('cta_title', 'option'); ?>" class="group inline-flex items-center justify-center border-2 border-white rounded-[100px] text-white text-md px-8 py-4 duration-200 hover:bg-white hover:text-[#2D2A26]">
                             <?php if (get_field('cta_title', 'option')) : ?>

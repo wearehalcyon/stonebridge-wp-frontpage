@@ -50,8 +50,8 @@ get_header();
     <?php if (have_rows('advantages')) : ?>
         <div class="w-full max-w-[1280px] mx-auto px-4 grid grid-cols-12 gap-4 lg:gap-6 py-6 border-b border-[#CDC7BF]">
             <?php while (have_rows('advantages')) : the_row(); ?>
-                <div class="col-span-6 xl:col-span-3 p-6 text-center">
-                    <h4 class="text-[29px] font-medium">
+                <div class="col-span-6 xl:col-span-3 p-4 lg:p-6 text-left lg:text-center">
+                    <h4 class="text-xl lg:text-[29px] font-medium">
                         <?php the_sub_field('title'); ?>
                     </h4>
                     <span class="block leading-[18px] mt-2">
@@ -64,7 +64,7 @@ get_header();
     <?php if (have_rows('cards')) : ?>
         <div class="w-full max-w-[1280px] mx-auto px-4 grid grid-cols-12 gap-x-4 lg:gap-x-6 py-6 mt-20">
             <?php if (get_field('title_01')) : ?>
-                <h2 class="col-span-12 text-[48px] leading-[50px] font-medium uppercase w-full max-w-[900px]">
+                <h2 class="col-span-12 text-[29px] lg:text-[48px] leading-[34px] lg:leading-[50px] font-medium uppercase w-full max-w-[900px]">
                     <?php the_field('title_01'); ?>
                 </h2>
             <?php endif; ?>
@@ -74,7 +74,7 @@ get_header();
                 </div>
             <?php endif; ?>
             <?php if (get_field('all_services_link')) : ?>
-                <div class="text-right col-span-12 lg:col-span-6 mt-3">
+                <div class="text-left lg:text-right col-span-12 lg:col-span-6 mt-3">
                     <a href="<?php the_field('all_services_link'); ?>" class="inline underline hover:no-underline" title="View all services">
                         View all services
                     </a>
@@ -403,7 +403,7 @@ get_header();
     <?php endif; ?>
     <div class="w-full max-w-[1280px] mx-auto mt-12 md:mt-[84px] px-4">
         <div class="grid grid-cols-12 gap-x-6">
-            <div class="col-span-5">
+            <div class="col-span-12 xl:col-span-5">
                 <h2 class="text-[29px] font-medium uppercase">
                     Contact
                 </h2>
@@ -465,7 +465,7 @@ get_header();
                     </div>
                 <?php endif; ?>
             </div>
-            <div class="col-span-7">
+            <div class="col-span-12 xl:col-span-7">
                 <div class="block border border-[#CDC7BF] rounded-3xl p-10">
                     <h2 class="uppercase text-[54px] font-medium">
                         Book Consultation
