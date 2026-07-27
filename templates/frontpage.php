@@ -81,35 +81,83 @@ get_header();
                 </div>
             <?php endif; ?>
         </div>
-        <div class="w-full max-w-[1280px] mx-auto px-4 grid grid-cols-12 gap-4 lg:gap-6 py-6 mt-4">
-            <?php while (have_rows('cards')) : the_row(); ?>
-                <div class="group col-span-12 lg:col-span-6 xl:col-span-4 border border-[#CDC7BF] rounded-2xl p-6 hover:bg-[#2D2A26] hover:border-[#2D2A26] hover:text-[#F7F3EC] duration-200">
-                    <?php if (get_sub_field('icon')) : ?>
-                        <div class="inline-flex p-3 rounded-md bg-[#E5E0D8] group-hover:bg-[#F7F3EC]">
-                            <?php echo get_sub_field('icon'); ?>
+        <div class="w-full max-w-[1280px] mx-auto px-4 py-6 mt-4">
+            <!-- Swiper Container for Mobile / Grid for Desktop -->
+            <div class="cards-swiper overflow-hidden lg:!overflow-visible">
+                <div class="swiper-wrapper lg:!transform-none lg:grid lg:grid-cols-12 lg:gap-6">
+                    <?php while (have_rows('cards')) : the_row(); ?>
+                        <div class="swiper-slide !h-auto col-span-12 lg:col-span-6 xl:col-span-4">
+                            <div class="group h-full flex flex-col justify-between border border-[#CDC7BF] rounded-2xl p-6 transition-colors duration-300
+                                    bg-[#F5F3EE] text-[#2D2A26]
+                                    [.swiper-slide-active_&]:bg-[#2D2A26] [.swiper-slide-active_&]:border-[#2D2A26] [.swiper-slide-active_&]:text-[#F7F3EC]
+                                    lg:hover:bg-[#2D2A26] lg:hover:border-[#2D2A26] lg:hover:text-[#F7F3EC]">
+                                <div>
+                                    <?php if ($icon = get_sub_field('icon')) : ?>
+                                        <div class="inline-flex p-3 rounded-md transition-colors duration-300
+                                                bg-[#E5E0D8] text-[#2D2A26]
+                                                [.swiper-slide-active_&]:bg-[#F7F3EC]
+                                                lg:group-hover:bg-[#F7F3EC]">
+                                            <?php echo $icon; ?>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <?php if ($title = get_sub_field('title')) : ?>
+                                        <h4 class="block mt-3 text-[24px] font-medium leading-tight">
+                                            <?php echo esc_html($title); ?>
+                                        </h4>
+                                    <?php endif; ?>
+
+                                    <?php if ($text = get_sub_field('text')) : ?>
+                                        <div class="block mt-3 mb-4 leading-[20px] transition-colors duration-300
+                                                text-stone-600
+                                                [.swiper-slide-active_&]:text-[#F7F3EC]/80
+                                                lg:group-hover:text-[#F7F3EC]/80">
+                                            <?php echo $text; ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+
+                                <?php if ($link = get_sub_field('link')) : ?>
+                                    <div>
+                                        <a href="<?php echo esc_url($link); ?>" class="underline hover:no-underline font-medium" title="Learn more">
+                                            Learn more
+                                        </a>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
                         </div>
-                    <?php endif; ?>
-                    <?php if (get_sub_field('title')) : ?>
-                        <h4 class="block mt-3 text-[24px] font-medium">
-                            <?php the_sub_field('title'); ?>
-                        </h4>
-                    <?php endif; ?>
-                    <?php if (get_sub_field('text')) : ?>
-                        <div class="block mt-3 mb-2 leading-[20px]">
-                            <?php the_sub_field('text'); ?>
-                        </div>
-                    <?php endif; ?>
-                    <?php if (get_sub_field('link')) : ?>
-                        <a href="<?php the_sub_field('text'); ?>" class="underline hover:no-underline font-medium" title="Learn more">
-                            Learn more
-                        </a>
-                    <?php endif; ?>
+                    <?php endwhile; ?>
                 </div>
-            <?php endwhile; ?>
+            </div>
+            <div class="mt-6 flex flex-col gap-4 lg:hidden">
+                <?php if (get_field('button_title_01') && get_field('button_link_01')) : ?>
+                    <a href="<?php the_field('button_link_01'); ?>" title="<?php the_field('button_title_01'); ?>" class="group w-full flex items-center justify-center gap-2 border-2 border-[#2D2A26] rounded-[100px] bg-[#2D2A26] text-[#F7F3EC] text-md font-medium px-8 py-4 duration-200 hover:bg-transparent hover:text-[#2D2A26]">
+                        <span><?php the_field('button_title_01'); ?></span>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path class="stroke-[#F7F3EC] group-hover:stroke-[#2D2A26] duration-200" d="M12 19L19 12L12 5M19 12L5 12" stroke="#F7F3EC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </a>
+                <?php endif; ?>
+                <div class="flex items-center justify-between pt-2">
+                    <div class="flex items-center gap-3">
+                        <button class="cards-prev w-12 h-12 rounded-full border border-[#2D2A26]/40 flex items-center justify-center hover:bg-stone-200 transition-colors cursor-pointer shrink-0">
+                            <svg class="w-4 h-4 text-[#2D2A26]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                        </button>
+                        <button class="cards-next w-12 h-12 rounded-full border border-[#2D2A26]/40 flex items-center justify-center hover:bg-stone-200 transition-colors cursor-pointer shrink-0">
+                            <svg class="w-4 h-4 text-[#2D2A26]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="w-auto cards-fraction text-xl font-medium tracking-tight"></div>
+                </div>
+            </div>
             <?php if (get_field('button_title_01') && get_field('button_link_01')) : ?>
-                <div class="col-span-12 mt-4 text-right">
-                    <a href="<?php the_field('button_link_01'); ?>" title="<?php the_field('button_title_01'); ?>" class="group w-full lg:w-auto flex lg:inline-flex items-center justify-center border-2 border-[#2D2A26] rounded-[100px] bg-[#2D2A26] text-[#F7F3EC] text-md font-medium px-8 py-4 duration-200 hover:bg-transparent hover:text-[#2D2A26]">
-                        <span class="inline mr-2"><?php the_field('button_title_01'); ?></span>
+                <div class="hidden lg:block mt-8 text-right">
+                    <a href="<?php the_field('button_link_01'); ?>" title="<?php the_field('button_title_01'); ?>" class="group inline-flex items-center justify-center gap-2 border-2 border-[#2D2A26] rounded-[100px] bg-[#2D2A26] text-[#F7F3EC] text-md font-medium px-8 py-4 duration-200 hover:bg-transparent hover:text-[#2D2A26]">
+                        <span><?php the_field('button_title_01'); ?></span>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path class="stroke-[#F7F3EC] group-hover:stroke-[#2D2A26] duration-200" d="M12 19L19 12L12 5M19 12L5 12" stroke="#F7F3EC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                         </svg>
@@ -119,13 +167,13 @@ get_header();
         </div>
     <?php endif; ?>
     <?php if (get_field('background_01')) : ?>
-        <div class="w-full max-w-[1280px] mx-auto mt-[168px] px-4">
-            <div class="px-[84px] py-[86px] relative overflow-hidden rounded-2xl text-[#F7F3EC] after:content-[''] after:absolute after:z-1 after:top-0 after:left-0 after:w-full after:h-full after:bg-gradient-to-r after:from-[#2D2A26] after:to-transparent" style="background: url('<?php echo get_field('background_01'); ?>') no-repeat center; background-size: cover;">
+        <div class="w-full max-w-[1280px] mx-auto mt-[60px] xl:mt-[168px] px-4">
+            <div class="px-[40px] lg:px-[84px] py-[40px] lg:py-[86px] relative overflow-hidden rounded-2xl text-[#F7F3EC] after:content-[''] after:absolute after:z-1 after:top-0 after:left-0 after:w-full after:h-full after:bg-gradient-to-r after:from-[#2D2A26] after:to-transparent" style="background: url('<?php echo get_field('background_01'); ?>') no-repeat center; background-size: cover;">
                 <div class="block relative z-10 w-full max-w-[420px]">
-                    <h2 class="text-[48px] leading-[50px] font-medium">
+                    <h2 class="text-[29px] lg:text-[48px] leading-[24px] lg:leading-[50px] font-medium">
                         <?php the_field('title_02'); ?>
                     </h2>
-                    <p class="">
+                    <p class="font-extralight lg:font-normal mt-2 lg:mt-0">
                         <?php the_field('subtitle_02'); ?>
                     </p>
                 </div>
@@ -136,13 +184,13 @@ get_header();
         <div class="w-full max-w-[1280px] mx-auto mt-4 px-4">
             <?php while (have_rows('experience_list')) : the_row(); $index = get_row_index(); ?>
                 <div class="grid grid-cols-12 gap-x-4 items-center py-12 px-8<?php echo $index != 1 ? ' border-t border-[#CDC7BF]' : null; ?>">
-                    <div class="col-span-4 text-[24px] font-medium">
+                    <div class="col-span-12 xl:col-span-4 text-[24px] font-medium">
                         <?php the_sub_field('title'); ?>
                     </div>
-                    <div class="col-span-4">
+                    <div class="col-span-12 xl:col-span-4">
                         <?php the_sub_field('text'); ?>
                     </div>
-                    <div class="col-span-4 text-right">
+                    <div class="hidden xl:block col-span-4 text-right">
                         <span class="inline-block w-3 h-3 rounded-lg bg-[#2D2A26]"></span>
                     </div>
                 </div>
@@ -178,7 +226,7 @@ get_header();
                             $initials .= mb_substr($words[1], 0, 1);
                         }
                 ?>
-                    <div class="col-span-12 lg:col-span-6 xl:col-span-4">
+                    <div class="col-span-12 lg:col-span-6 xl:col-span-4 border-b xl:border-0 border-[#CDC7BF] pb-10 xl:pb-0">
                         <div class="flex items-center justify-center h-[480px]">
                             <?php if ($photo) : ?>
                                 <img src="<?php echo $photo['url']; ?>" class="w-full h-full object-cover object-top" alt="<?php the_sub_field('name'); ?>" width="<?php echo $photo['width']; ?>" height="<?php echo $photo['height']; ?>">
@@ -209,60 +257,70 @@ get_header();
         </div>
     <?php endif; ?>
     <?php if (have_rows('slider_04')) : ?>
-        <div class="w-full max-w-[1280px] mx-auto px-4 py-12">
-            <div class="flex justify-between items-start mb-12">
-                <h2 class="text-[48px] leading-[1.1] font-medium tracking-tight text-[#1c1b18] uppercase max-w-[500px]">
+        <div class="w-full max-w-[1280px] mx-auto px-4 py-8 lg:py-12">
+            <div class="flex flex-col lg:flex-row justify-between items-start mb-6 lg:mb-12 gap-3 lg:gap-6">
+                <h2 class="text-[28px] sm:text-[36px] xl:text-[48px] leading-[1.08] font-semibold tracking-tight text-[#1c1b18] uppercase max-w-none lg:max-w-[500px]">
                     <?php the_field('title_04'); ?>
                 </h2>
-                <span class="text-sm font-medium text-[#6e6c64]"><?php the_field('subtitle_04'); ?></span>
+                <?php if (get_field('subtitle_04')) : ?>
+                    <span class="text-sm font-medium text-[#6e6c64] max-w-[340px] leading-relaxed">
+                    <?php the_field('subtitle_04'); ?>
+                </span>
+                <?php endif; ?>
             </div>
-
-            <div class="swiper process-text-slider mb-8">
+            <div class="swiper process-text-slider overflow-hidden mb-6 lg:mb-8">
                 <div class="swiper-wrapper">
                     <?php while (have_rows('slider_04')) : the_row(); ?>
-                        <div class="swiper-slide">
-                            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-                                <div class="lg:col-span-4 text-[15px] font-medium text-[#6e6c64]">
-                                    <?php the_sub_field('subtitle'); ?>
-                                </div>
-                                <div class="lg:col-span-5">
-                                    <h3 class="text-[28px] font-medium text-[#1c1b18] mb-4">
-                                        <?php the_sub_field('title'); ?>
-                                    </h3>
-                                    <p class="text-[16px] leading-relaxed text-[#5a5953]">
-                                        <?php the_sub_field('text'); ?>
-                                    </p>
+                        <div class="swiper-slide !h-auto">
+                            <div class="h-full border border-[#CDC7BF] rounded-2xl p-6 bg-[#F5F3EE] lg:bg-transparent lg:border-none lg:p-0">
+                                <div class="grid grid-cols-1 lg:grid-cols-12 gap-2 lg:gap-6 items-start">
+                                    <?php if ($subtitle = get_sub_field('subtitle')) : ?>
+                                        <div class="hidden lg:block lg:col-span-4 text-[15px] font-medium text-[#6e6c64]">
+                                            <?php echo esc_html($subtitle); ?>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <div class="lg:col-span-8 xl:col-span-7">
+                                        <h3 class="text-[20px] lg:text-[28px] font-semibold text-[#1c1b18] mb-2 lg:mb-4 leading-snug">
+                                            <?php the_sub_field('title'); ?>
+                                        </h3>
+                                        <p class="text-[14px] lg:text-[16px] leading-relaxed text-[#5a5953]">
+                                            <?php the_sub_field('text'); ?>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     <?php endwhile; ?>
-
                 </div>
             </div>
-            <div class="relative pt-6 pb-6 flex flex-wrap items-center justify-between gap-6">
-                <div class="flex items-center gap-6">
-                    <button class="process-prev w-12 h-12 rounded-full border border-[#1c1b18] flex items-center justify-center hover:bg-[#1c1b18] hover:text-white transition-colors">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-                    </button>
-
-                    <div class="process-pagination flex gap-4 text-[22px] font-medium"></div>
-
-                    <button class="process-next w-12 h-12 rounded-full border border-[#1c1b18] flex items-center justify-center hover:bg-[#1c1b18] hover:text-white transition-colors">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-                    </button>
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 lg:gap-6 mb-6 lg:mb-8">
+                <div class="flex items-center justify-between lg:justify-start gap-4 order-1 lg:order-1">
+                    <div class="flex items-center gap-3">
+                        <button class="process-prev w-12 h-12 rounded-full border border-[#1c1b18]/40 lg:border-[#1c1b18] flex items-center justify-center hover:bg-[#1c1b18] hover:text-white transition-colors shrink-0">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+                        </button>
+                        <button class="process-next w-12 h-12 rounded-full border border-[#1c1b18]/40 lg:border-[#1c1b18] flex items-center justify-center hover:bg-[#1c1b18] hover:text-white transition-colors shrink-0">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                        </button>
+                    </div>
+                    <div class="w-auto process-pagination flex items-center gap-2 text-xl font-medium"></div>
                 </div>
-
-                <a href="<?php the_field('button_link_04'); ?>" title="<?php the_field('button_title_04'); ?>" class="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#2a2825] text-white text-base font-medium hover:bg-[#1c1b18] transition-colors">
-                    <span><?php the_field('button_title_04'); ?></span>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
+                <?php if (get_field('button_title_04') && get_field('button_link_04')) : ?>
+                    <div class="order-2 lg:order-2">
+                        <a href="<?php the_field('button_link_04'); ?>" title="<?php the_field('button_title_04'); ?>" class="w-full lg:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#2a2825] text-white text-base font-medium hover:bg-[#1c1b18] transition-colors">
+                            <span><?php the_field('button_title_04'); ?></span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                <?php endif; ?>
             </div>
-            <div class="relative swiper-scrollbar process-scrollbar !mb-0 top-[1px]"></div>
+            <div class="relative swiper-scrollbar process-scrollbar !mb-0 top-[1px] border-t border-[#1c1b18]/15"></div>
             <div class="swiper process-cards-slider overflow-hidden">
                 <div class="swiper-wrapper">
                     <?php while (have_rows('slider_04')) : the_row(); ?>
                         <div class="swiper-slide">
-                            <img src="<?php echo get_template_directory_uri() . '/assets/svg/bridge.svg'; ?>" alt="Bridge Item">
+                            <img src="<?php echo get_template_directory_uri() . '/assets/svg/bridge.svg'; ?>" class="w-full h-auto block" alt="Bridge Item">
                         </div>
                     <?php endwhile; ?>
                 </div>
@@ -272,7 +330,7 @@ get_header();
     <?php endif; ?>
     <?php if (have_rows('slider_05')) : ?>
         <div class="w-full max-w-[1280px] mx-auto mt-[68px] px-4">
-            <h2 class="text-[48px] uppercase font-medium">
+            <h2 class="text-[29px] xl:text-[48px] leading-[1.1] mb-6 xl:mb-0 uppercase font-medium">
                 <?php the_field('title_05'); ?>
             </h2>
             <div class="relative">
@@ -282,8 +340,8 @@ get_header();
                             <div class="swiper-slide">
                                 <div class="review-card">
                                     <div class="review-header">
-                                        <p class="review-text"><?php the_sub_field('text'); ?></p>
-                                        <div class="quote-icon">
+                                        <div class="review-text order-2 xl:order-1"><?php the_sub_field('text'); ?></div>
+                                        <div class="quote-icon order-1 xl:order-2">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M14.5729 4.55804C18.3379 6.97604 20.4296 9.79054 20.8479 13.0015C21.4994 18 17.0294 20.4465 14.7644 18.2485C12.4994 16.0505 13.8569 13.26 15.4969 12.497C17.1369 11.734 18.1399 12 17.9649 10.9805C17.7899 9.96103 15.4569 7.13554 13.4069 5.81954C13.3344 5.75769 13.2881 5.67055 13.2775 5.57581C13.2669 5.48108 13.2928 5.38587 13.3499 5.30954L13.8569 4.65004C14.0769 4.36404 14.2879 4.37503 14.5729 4.55753M4.65993 4.55804C8.42493 6.97604 10.5166 9.79054 10.9349 13.0015C11.5869 18 7.11693 20.4465 4.85193 18.2485C2.58693 16.0505 3.94443 13.26 5.58493 12.497C7.22543 11.734 8.22793 12 8.05293 10.9805C7.87792 9.96103 5.54443 7.13554 3.49443 5.81954C3.42196 5.75762 3.37579 5.67044 3.36529 5.57571C3.3548 5.48098 3.38077 5.38581 3.43793 5.30954L3.94443 4.65004C4.16442 4.36404 4.37543 4.37503 4.65993 4.55753" fill="#2D2A26"/>
                                             </svg>
@@ -329,7 +387,7 @@ get_header();
                 <?php endif; ?>
             </div>
             <div class="relative flex flex-col lg:flex-row items-center lg:items-end justify-between gap-8">
-                <div class="z-20 w-full max-w-[320px] bg-[#f4f2ea] border border-[#e2e0d8] rounded-2xl p-6 shadow-sm flex flex-col items-center text-center">
+                <div class="z-20 w-full max-w-[320px] bg-[#f4f2ea] border border-[#e2e0d8] rounded-2xl p-6 shadow-sm flex flex-col items-center text-center order-2 lg:order-1">
                     <?php if (get_field('flag_06')) : ?>
                         <div class="w-12 h-8 mb-4 overflow-hidden rounded-sm shadow-xs flex items-center justify-center">
                             <img src="<?php the_field('flag_06'); ?>" alt="Canada Flag" class="w-full h-full object-cover">
@@ -344,8 +402,8 @@ get_header();
                         <?php the_field('button_title_06'); ?>
                     </a>
                 </div>
-                <div class="relative w-full lg:w-[60%] flex justify-end">
-                    <svg class="hidden lg:block absolute inset-0 w-[1000px] left-[-350px] h-full pointer-events-none z-10" preserveAspectRatio="none" viewBox="0 0 100 100">
+                <div class="relative w-full lg:w-[60%] flex justify-end order-1 lg:order-2">
+                    <svg class="hidden xl:block absolute inset-0 w-[200px] rotate-[90deg] lg:rotate-0 lg:w-[1000px] top-[248px] lg:top-0 left-[268px] lg:left-[-350px] h-full pointer-events-none z-10" preserveAspectRatio="none" viewBox="0 0 100 100">
                         <line x1="0" y1="80" x2="85" y2="93.5" stroke="#1c1b18" stroke-width="1.5" vector-effect="non-scaling-stroke"></line>
                     </svg>
                     <img src="<?php echo esc_url(get_field('image_06')); ?>" alt="Map of Canada" class="w-full h-auto object-contain z-0 relative">
@@ -356,7 +414,7 @@ get_header();
     <?php if (have_rows('faqs')) : ?>
         <div class="w-full max-w-[1280px] mx-auto mt-12 md:mt-[168px] px-4">
             <div class="grid grid-cols-12 gap-x-6">
-                <div class="col-span-4">
+                <div class="col-span-12 lg:col-span-4">
                     <h2 class="text-[64px] font-medium uppercase"><?php the_field('title_07'); ?></h2>
                     <div class="block">
                         <?php while (have_rows('faqs')) : the_row(); $index = get_row_index(); ?>
@@ -371,7 +429,7 @@ get_header();
                         <?php endwhile; ?>
                     </div>
                 </div>
-                <div class="col-span-8">
+                <div class="col-span-12 lg:col-span-8">
                     <?php while (have_rows('faqs')) : the_row(); $index = get_row_index(); ?>
                         <div data-window-id="window-<?php echo $index; ?>" class="<?php echo $index == 1 ? 'block' : 'hidden' ?>">
                             <?php if (have_rows('sub_faqs')) : ?>
@@ -466,25 +524,25 @@ get_header();
                 <?php endif; ?>
             </div>
             <div class="col-span-12 xl:col-span-7">
-                <div class="block border border-[#CDC7BF] rounded-3xl p-10">
-                    <h2 class="uppercase text-[54px] font-medium">
+                <div class="block border border-[#CDC7BF] rounded-3xl p-6 lg:p-10 mt-4 xl:mt-0">
+                    <h2 class="uppercase text-[29px] xl:text-[54px] font-medium">
                         Book Consultation
                     </h2>
                     <form action="" class="relative">
                         <div class="grid grid-cols-12 gap-4">
-                            <div class="col-span-6">
+                            <div class="col-span-12 lg:col-span-6">
                                 <label for="fname" class="text-[13px] pl-3">First Name</label>
                                 <input id="fname" type="text" name="fname" placeholder="Jane" class="w-full border-1 border-[#E5E0D8] rounded-3xl bg-[#E5E0D8] py-2 px-4 hover:border-black duration-200">
                             </div>
-                            <div class="col-span-6">
+                            <div class="col-span-12 lg:col-span-6">
                                 <label for="lname" class="text-[13px] pl-3">Last Name</label>
                                 <input id="lname" type="text" name="lname" placeholder="Cooper" class="w-full border-1 border-[#E5E0D8] rounded-3xl bg-[#E5E0D8] py-2 px-4 hover:border-black duration-200">
                             </div>
-                            <div class="col-span-6">
+                            <div class="col-span-12 lg:col-span-6">
                                 <label for="email" class="text-[13px] pl-3">Email</label>
                                 <input id="email" type="email" name="email" placeholder="jane.cooper@example.com" class="w-full border-1 border-[#E5E0D8] rounded-3xl bg-[#E5E0D8] py-2 px-4 hover:border-black duration-200">
                             </div>
-                            <div class="col-span-6">
+                            <div class="col-span-12 lg:col-span-6">
                                 <label for="phone" class="text-[13px] pl-3">Phone</label>
                                 <input id="phone" type="tel" name="phone" placeholder="(416) 555-0199" class="w-full border-1 border-[#E5E0D8] rounded-3xl bg-[#E5E0D8] py-2 px-4 hover:border-black duration-200">
                             </div>
@@ -500,12 +558,12 @@ get_header();
                                 <label for="text" class="text-[13px] pl-3">Summary of Tax Matter</label>
                                 <textarea name="text" id="text" cols="30" rows="10" class="w-full h-[100px] resize-none border-1 border-[#E5E0D8] rounded-3xl bg-[#E5E0D8] py-2 px-4 hover:border-black duration-200" placeholder="Tell us briefly about your tax matter and how we can help."></textarea>
                             </div>
-                            <div class="col-span-12 flex items-center justify-between">
+                            <div class="col-span-12 flex flex-wrap items-center justify-between">
                                 <label class="flex items-center w-full lg:w-[calc(100%-205px)]">
                                     <input type="checkbox" name="agreement" class="w-[16px] h-[16px]">
                                     <span class="inline-block cursor-pointer ml-2 text-[13px]">My case involves an urgent CRA deadline or active collection</span>
                                 </label>
-                                <button title="Send Request" type="button" class="group w-full lg:w-[205px] flex lg:inline-flex items-center justify-center border-2 border-[#2D2A26] rounded-[100px] bg-[#2D2A26] text-[#F7F3EC] text-md font-medium px-8 py-4 duration-200 hover:bg-transparent hover:text-[#2D2A26]">
+                                <button title="Send Request" type="button" class="group w-full lg:w-[205px] flex lg:inline-flex items-center justify-center border-2 border-[#2D2A26] rounded-[100px] bg-[#2D2A26] text-[#F7F3EC] text-md font-medium px-8 py-4 duration-200 hover:bg-transparent hover:text-[#2D2A26] mt-3 xl:mt-0">
                                     <span class="inline mr-2">Send Request</span>
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path class="stroke-[#F7F3EC] group-hover:stroke-[#2D2A26] duration-200" d="M12 19L19 12L12 5M19 12L5 12" stroke="#F7F3EC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>

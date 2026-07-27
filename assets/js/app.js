@@ -50,45 +50,120 @@ jQuery(document).ready(function($) {
     });
 
     // Bridge slider
-    const cardsSlider = new Swiper('.process-cards-slider', {
-        slidesPerView: 1.5,
-        spaceBetween: 0,
-        speed: 600,
-        breakpoints: {
-            640: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 }
-        }
-    });
+    $(document).ready(function () {
 
-    const textSlider = new Swiper('.process-text-slider', {
-        slidesPerView: 1,
-        spaceBetween: 30,
-        speed: 500,
+        // 1. Нижний слайдер (Арки моста)
+        const cardsSlider = new Swiper('.process-cards-slider', {
+            slidesPerView: 1.5,
+            spaceBetween: 0,
+            speed: 600,
+            grabCursor: true,
+            breakpoints: {
+                640: {
+                    slidesPerView: 1.5,
+                    spaceBetween: 0
+                },
+                1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 0
+                }
+            }
+        });
 
-        navigation: {
-            nextEl: '.process-next',
-            prevEl: '.process-prev',
-        },
+        // 2. Верхний слайдер (Текст / Карточки)
+        const textSlider = new Swiper('.process-text-slider', {
+            slidesPerView: 1.15,
+            spaceBetween: 12,
+            speed: 500,
 
-        pagination: {
-            el: '.process-pagination',
-            clickable: true,
-            bulletClass: 'page-num',
-            bulletActiveClass: 'active',
-            renderBullet: function (index, className) {
-                const num = (index + 1 < 10 ? '0' : '') + (index + 1);
-                return `<span class="${className}">${num}</span>`;
+            breakpoints: {
+                1024: {
+                    slidesPerView: 1,
+                    spaceBetween: 30
+                }
             },
-        },
 
-        scrollbar: {
-            el: '.process-scrollbar',
-            draggable: true,
-        }
+            navigation: {
+                nextEl: '.process-next',
+                prevEl: '.process-prev',
+            },
+
+            pagination: {
+                el: '.process-pagination',
+                type: 'fraction',
+                renderFraction: function (currentClass, totalClass) {
+                    return `<span class="text-[#1c1b18] font-bold ${currentClass}"></span>` +
+                        `<span class="text-[#8c8a82] font-normal mx-1">/</span>` +
+                        `<span class="text-[#8c8a82] font-normal ${totalClass}"></span>`;
+                },
+                formatFractionCurrent: function (number) {
+                    return (number < 10 ? '0' : '') + number;
+                },
+                formatFractionTotal: function (number) {
+                    return (number < 10 ? '0' : '') + number;
+                }
+            },
+
+            scrollbar: {
+                el: '.process-scrollbar',
+                draggable: true,
+            }
+        });
+
+        textSlider.controller.control = cardsSlider;
+        cardsSlider.controller.control = textSlider;
+
     });
 
-    textSlider.controller.control = cardsSlider;
-    cardsSlider.controller.control = textSlider;
+    // Cards mobile slider
+    let cardsSwiper = null;
+    const breakpoint = window.matchMedia('(max-width: 1023px)');
+
+    function initSwiper() {
+        if (breakpoint.matches) {
+            if (!cardsSwiper) {
+                cardsSwiper = new Swiper('.cards-swiper', {
+                    slidesPerView: 1.15,
+                    spaceBetween: 16,
+                    speed: 400,
+                    grabCursor: true,
+                    breakpoints: {
+                        640: {
+                            slidesPerView: 1.6,
+                            spaceBetween: 20
+                        }
+                    },
+                    navigation: {
+                        nextEl: '.cards-next',
+                        prevEl: '.cards-prev',
+                    },
+                    pagination: {
+                        el: '.cards-fraction',
+                        type: 'fraction',
+                        renderFraction: function (currentClass, totalClass) {
+                            return `<span class="text-[#2D2A26] font-semibold ${currentClass}"></span>` +
+                                `<span class="text-[#CDC7BF] font-normal mx-1">/</span>` +
+                                `<span class="text-[#CDC7BF] font-normal ${totalClass}"></span>`;
+                        },
+                        formatFractionCurrent: function (number) {
+                            return (number < 10 ? '0' : '') + number;
+                        },
+                        formatFractionTotal: function (number) {
+                            return (number < 10 ? '0' : '') + number;
+                        }
+                    }
+                });
+            }
+        } else {
+            if (cardsSwiper) {
+                cardsSwiper.destroy(true, true);
+                cardsSwiper = null;
+            }
+        }
+    }
+
+    breakpoint.addEventListener('change', initSwiper);
+    initSwiper();
 
     // FAQs tabs
     let tab_window = $('[data-window]'),

@@ -4,10 +4,10 @@
                 <div class="col-span-12 lg:col-span-6 xl:col-span-4">
                     <?php dynamic_sidebar('sidebar-1'); ?>
                 </div>
-                <div class="col-span-12 lg:col-span-6 xl:col-span-3 mt-6 lg:mt-0">
+                <div class="col-span-6 lg:col-span-6 xl:col-span-3 mt-6 lg:mt-0">
                     <?php dynamic_sidebar('sidebar-2'); ?>
                 </div>
-                <div class="col-span-12 lg:col-span-6 xl:col-span-3 mt-6 lg:mt-0">
+                <div class="col-span-6 lg:col-span-6 xl:col-span-3 mt-6 lg:mt-0">
                     <?php dynamic_sidebar('sidebar-3'); ?>
                 </div>
             </div>
