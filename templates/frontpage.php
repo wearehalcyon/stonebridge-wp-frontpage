@@ -349,5 +349,122 @@ get_header();
             </div>
         </div>
     <?php endif; ?>
+    <div class="w-full max-w-[1280px] mx-auto mt-12 md:mt-[84px] px-4">
+        <div class="grid grid-cols-12 gap-x-6">
+            <div class="col-span-5">
+                <h2 class="text-[29px] font-medium uppercase">
+                    Contact
+                </h2>
+                <?php if (get_field('address')) : ?>
+                    <div class="flex w-full mb-3">
+                        <div class="w-[24px] h-[24px]">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 10C20 16.5 12 22 12 22C12 22 4 16.5 4 10C4 7.87827 4.84285 5.84344 6.34315 4.34315C7.84344 2.84285 9.87827 2 12 2C14.1217 2 16.1566 2.84285 17.6569 4.34315C19.1571 5.84344 20 7.87827 20 10Z" stroke="#2D2A26" stroke-width="2"/>
+                                <path d="M15 10C15 10.7956 14.6839 11.5587 14.1213 12.1213C13.5587 12.6839 12.7956 13 12 13C11.2044 13 10.4413 12.6839 9.87868 12.1213C9.31607 11.5587 9 10.7956 9 10C9 9.20435 9.31607 8.44129 9.87868 7.87868C10.4413 7.31607 11.2044 7 12 7C12.7956 7 13.5587 7.31607 14.1213 7.87868C14.6839 8.44129 15 9.20435 15 10Z" stroke="#2D2A26" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="block w-[calc(100%-24px)] ml-2">
+                            <span class="font-normal underline">
+                                <?php the_field('address'); ?>
+                            </span>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <?php if (get_field('phone')) : ?>
+                    <div class="flex w-full mb-3">
+                        <div class="w-[24px] h-[24px]">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6.54 5C6.6 5.89 6.75 6.76 6.99 7.59L5.79 8.79C5.38 7.59 5.12 6.32 5.03 5H6.54ZM16.4 17.02C17.25 17.26 18.12 17.41 19 17.47V18.96C17.68 18.87 16.41 18.61 15.2 18.21L16.4 17.02ZM7.5 3H4C3.45 3 3 3.45 3 4C3 13.39 10.61 21 20 21C20.55 21 21 20.55 21 20V16.51C21 15.96 20.55 15.51 20 15.51C18.76 15.51 17.55 15.31 16.43 14.94C16.331 14.903 16.2256 14.886 16.12 14.89C15.86 14.89 15.61 14.99 15.41 15.18L13.21 17.38C10.3755 15.9303 8.06966 13.6245 6.62 10.79L8.82 8.59C9.1 8.31 9.18 7.92 9.07 7.57C8.69132 6.41789 8.4989 5.21274 8.5 4C8.5 3.45 8.05 3 7.5 3Z" fill="#2D2A26"/>
+                            </svg>
+                        </div>
+                        <div class="block w-[calc(100%-24px)] ml-2">
+                            <a href="tel:<?php the_field('phone'); ?>" title="Phone" class="font-normal underline hover:no-underline">
+                                <?php the_field('phone'); ?>
+                            </a>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <?php if (get_field('email')) : ?>
+                    <div class="flex w-full mb-3">
+                        <div class="w-[24px] h-[24px]">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6ZM20 6L12 11L4 6H20ZM20 18H4V8L12 13L20 8V18Z" fill="#2D2A26"/>
+                            </svg>
+                        </div>
+                        <div class="block w-[calc(100%-24px)] ml-2">
+                            <a href="mailto:<?php the_field('email'); ?>" title="Email" class="font-normal underline hover:no-underline">
+                                <?php the_field('email'); ?>
+                            </a>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <?php if (get_field('hours')) : ?>
+                    <div class="flex w-full mb-3">
+                        <div class="w-[24px] h-[24px]">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2.5C17.2469 2.5 21.5 6.75314 21.5 12C21.5 17.2469 17.2469 21.5 12 21.5C6.75314 21.5 2.5 17.2469 2.5 12C2.5 6.75314 6.75314 2.5 12 2.5ZM12 3.5C9.74566 3.5 7.58332 4.3952 5.98926 5.98926C4.3952 7.58332 3.5 9.74566 3.5 12C3.5 14.2543 4.3952 16.4167 5.98926 18.0107C7.58332 19.6048 9.74566 20.5 12 20.5C14.2543 20.5 16.4167 19.6048 18.0107 18.0107C19.6048 16.4167 20.5 14.2543 20.5 12C20.5 9.74566 19.6048 7.58332 18.0107 5.98926C16.4167 4.3952 14.2543 3.5 12 3.5ZM12 6.5C12.1223 6.50003 12.2406 6.54475 12.332 6.62598C12.4235 6.70733 12.4817 6.81983 12.4961 6.94141L12.5 7.0127V11.793L15.3535 14.6465C15.4428 14.7363 15.4941 14.8568 15.498 14.9834C15.5019 15.1104 15.458 15.2348 15.374 15.3301C15.29 15.4253 15.1723 15.485 15.0459 15.4971C14.9225 15.5088 14.7994 15.4734 14.7002 15.3994L14.6309 15.3379L11.6465 12.3535C11.57 12.2769 11.521 12.1774 11.5059 12.0703L11.5 11.9795V7C11.5 6.86739 11.5527 6.74025 11.6465 6.64648C11.7403 6.55272 11.8674 6.5 12 6.5Z" fill="#2D2A26" stroke="#2D2A26"/>
+                            </svg>
+                        </div>
+                        <div class="block w-[calc(100%-24px)] ml-2">
+                            <span class="font-normal">
+                                <?php the_field('hours'); ?>
+                            </span>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            </div>
+            <div class="col-span-7">
+                <div class="block border border-[#CDC7BF] rounded-3xl p-10">
+                    <h2 class="uppercase text-[54px] font-medium">
+                        Book Consultation
+                    </h2>
+                    <form action="" class="relative">
+                        <div class="grid grid-cols-12 gap-4">
+                            <div class="col-span-6">
+                                <label for="fname" class="text-[13px] pl-3">First Name</label>
+                                <input id="fname" type="text" name="fname" placeholder="Jane" class="w-full border-1 border-[#E5E0D8] rounded-3xl bg-[#E5E0D8] py-2 px-4 hover:border-black duration-200">
+                            </div>
+                            <div class="col-span-6">
+                                <label for="lname" class="text-[13px] pl-3">Last Name</label>
+                                <input id="lname" type="text" name="lname" placeholder="Cooper" class="w-full border-1 border-[#E5E0D8] rounded-3xl bg-[#E5E0D8] py-2 px-4 hover:border-black duration-200">
+                            </div>
+                            <div class="col-span-6">
+                                <label for="email" class="text-[13px] pl-3">Email</label>
+                                <input id="email" type="email" name="email" placeholder="jane.cooper@example.com" class="w-full border-1 border-[#E5E0D8] rounded-3xl bg-[#E5E0D8] py-2 px-4 hover:border-black duration-200">
+                            </div>
+                            <div class="col-span-6">
+                                <label for="phone" class="text-[13px] pl-3">Phone</label>
+                                <input id="phone" type="tel" name="phone" placeholder="(416) 555-0199" class="w-full border-1 border-[#E5E0D8] rounded-3xl bg-[#E5E0D8] py-2 px-4 hover:border-black duration-200">
+                            </div>
+                            <div class="col-span-12">
+                                <label for="cmethod" class="text-[13px] pl-3">Preferred Contact</label>
+                                <select name="contact_method" id="cmethod" class="w-full border-1 border-[#E5E0D8] rounded-3xl bg-[#E5E0D8] py-2 px-4 hover:border-black duration-200">
+                                    <option disabled readonly selected>Select contact method...</option>
+                                    <option value="email">Email</option>
+                                    <option value="phone">Phone</option>
+                                </select>
+                            </div>
+                            <div class="col-span-12">
+                                <label for="text" class="text-[13px] pl-3">Summary of Tax Matter</label>
+                                <textarea name="text" id="text" cols="30" rows="10" class="w-full h-[100px] resize-none border-1 border-[#E5E0D8] rounded-3xl bg-[#E5E0D8] py-2 px-4 hover:border-black duration-200" placeholder="Tell us briefly about your tax matter and how we can help."></textarea>
+                            </div>
+                            <div class="col-span-12 flex items-center justify-between">
+                                <label class="flex items-center w-full lg:w-[calc(100%-205px)]">
+                                    <input type="checkbox" name="agreement" class="w-[16px] h-[16px]">
+                                    <span class="inline-block cursor-pointer ml-2 text-[13px]">My case involves an urgent CRA deadline or active collection</span>
+                                </label>
+                                <button title="Send Request" type="button" class="group w-full lg:w-[205px] flex lg:inline-flex items-center justify-center border-2 border-[#2D2A26] rounded-[100px] bg-[#2D2A26] text-[#F7F3EC] text-md font-medium px-8 py-4 duration-200 hover:bg-transparent hover:text-[#2D2A26]">
+                                    <span class="inline mr-2">Send Request</span>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path class="stroke-[#F7F3EC] group-hover:stroke-[#2D2A26] duration-200" d="M12 19L19 12L12 5M19 12L5 12" stroke="#F7F3EC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 <?php
 get_footer();
