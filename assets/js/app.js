@@ -12,17 +12,17 @@ jQuery(document).ready(function($) {
 
     // Testimonials Slider
     const swiper = new Swiper('.reviews-slider', {
-        slidesPerView: 1.2,
+        slidesPerView: 1.5,
         spaceBetween: 20,
         loop: false,
 
         breakpoints: {
             768: {
-                slidesPerView: 2.2,
+                slidesPerView: 1.5,
                 spaceBetween: 20,
             },
             1024: {
-                slidesPerView: 2.4,
+                slidesPerView: 2.5,
                 spaceBetween: 24,
             }
         },

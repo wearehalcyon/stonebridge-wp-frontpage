@@ -276,11 +276,8 @@ get_header();
                 <?php the_field('title_05'); ?>
             </h2>
             <div class="relative">
-                <!-- Основной контейнер Swiper -->
                 <div class="swiper reviews-slider">
                     <div class="swiper-wrapper">
-
-                        <!-- Слайд 1 -->
                         <?php while (have_rows('slider_05')) : the_row(); ?>
                             <div class="swiper-slide">
                                 <div class="review-card">
@@ -299,14 +296,9 @@ get_header();
                                 </div>
                             </div>
                         <?php endwhile; ?>
-
                     </div>
                 </div>
-
-                <!-- Прогресс-бар -->
                 <div class="swiper-scrollbar"></div>
-
-                <!-- Нижняя панель управления (Стрелки и пагинация) -->
                 <div class="slider-controls">
                     <div class="nav-buttons">
                         <button class="btn-prev">
@@ -316,8 +308,6 @@ get_header();
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
                         </button>
                     </div>
-
-                    <!-- Числовая пагинация -->
                     <div class="custom-pagination"></div>
                 </div>
             </div>
