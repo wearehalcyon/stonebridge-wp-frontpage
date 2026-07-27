@@ -25,8 +25,8 @@ function stonebridge_scripts() {
 	wp_enqueue_style( 'stonebridge-app', get_template_directory_uri() . '/assets/scss/app.css?version=' . filemtime(get_template_directory() . '/assets/scss/app.css') );
 
 	// Add main app scripts
-	wp_enqueue_script( 'stonebridge-swiper-bundle', get_template_directory_uri() . '/assets/js/swiper-bundle.min.js?version=' . filemtime(get_template_directory() . '/assets/js/swiper-bundle.min.js'), array(), '', true );
-	wp_enqueue_script( 'stonebridge-app', get_template_directory_uri() . '/assets/js/app.js?version=' . filemtime(get_template_directory() . '/assets/js/app.js'), array(), '', true );
+	wp_enqueue_script( 'stonebridge-swiper-bundle', get_template_directory_uri() . '/assets/js/swiper-bundle.min.js?version=' . filemtime(get_template_directory() . '/assets/js/swiper-bundle.min.js'), array('jquery'), '', true );
+	wp_enqueue_script( 'stonebridge-app', get_template_directory_uri() . '/assets/js/app.js?version=' . filemtime(get_template_directory() . '/assets/js/app.js'), array('jquery'), '', true );
 }
 add_action( 'wp_enqueue_scripts', 'stonebridge_scripts' );
 
@@ -38,6 +38,8 @@ add_filter( 'use_block_editor_for_post_type', '__return_false', 10 );
 add_action('after_setup_theme', function () {
     register_nav_menus([
         'primary' => 'Primary',
+        'footer-1' => 'Footer 1',
+        'footer-2' => 'Footer 2',
     ]);
 });
 
@@ -78,3 +80,35 @@ add_filter('wp_handle_upload_prefilter', function ($file) {
 add_action('admin_head', function () {
     echo '<style>td.media-icon img[src$=".svg"], .attachment-266x266 img[src$=".svg"] { width: 100% !important; height: auto !important; }</style>';
 });
+
+// Init widgets support
+function stonebridge_widgets_init() {
+    register_sidebar( array(
+        'name'          => 'Footer Sidebar 1',
+        'id'            => 'sidebar-1',
+        'before_widget' => '<div id="%1$s" class="widget %2$s [&_li]:block [&_li]:my-1 [&_li>a:hover]:underline">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h4 class="widget-title text-[20px] font-medium mb-1">',
+        'after_title'   => '</h4>',
+    ) );
+    register_sidebar( array(
+        'name'          => 'Footer Sidebar 2',
+        'id'            => 'sidebar-2',
+        'before_widget' => '<div id="%1$s" class="widget %2$s [&_li]:block [&_li]:my-1 [&_li>a:hover]:underline">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h4 class="widget-title text-[20px] font-medium mb-1">',
+        'after_title'   => '</h4>',
+    ) );
+    register_sidebar( array(
+        'name'          => 'Footer Sidebar 3',
+        'id'            => 'sidebar-3',
+        'before_widget' => '<div id="%1$s" class="widget %2$s [&_li]:block [&_li]:my-1 [&_li>a:hover]:underline">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h4 class="widget-title text-[20px] font-medium mb-1">',
+        'after_title'   => '</h4>',
+    ) );
+}
+add_action( 'widgets_init', 'stonebridge_widgets_init' );
+
+// Disables the Gutenberg block editor from managing widgets
+add_filter( 'use_widgets_block_editor', '__return_false' );

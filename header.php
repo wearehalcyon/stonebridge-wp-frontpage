@@ -9,9 +9,9 @@
 
 <body <?php body_class('bg-[#F7F3EC]'); ?>>
 	<?php wp_body_open(); ?>
-	<header class="fixed top-0 left-0 w-full py-6 z-50">
+	<header class="fixed top-0 left-0 w-full py-6 z-50 duration-200">
 		<div class="flex items-center justify-between w-full max-w-[1280px] mx-auto px-4">
-            <div class="grid grid-cols-12 gap-4 lg:gap-6 w-full">
+            <div class="grid grid-cols-12 gap-4 lg:gap-6 w-full items-center">
                 <div class="col-span-6 md:col-span-3 lg:col-span-2">
                     <a href="<?php echo home_url('/'); ?>" class="inline" title="<?php bloginfo('name'); ?>">
                         <?php if (get_field('logo', 'option')) : ?>
