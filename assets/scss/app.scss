@@ -169,3 +169,15 @@ body.admin-bar header {
 .widget_media_image{
     margin-bottom: 30px;
 }
+
+// Bridge slider
+.process-pagination .page-num {
+    color: #b3b1a8;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.process-pagination .page-num.active {
+    color: #1c1b18;
+    font-weight: 600;
+}

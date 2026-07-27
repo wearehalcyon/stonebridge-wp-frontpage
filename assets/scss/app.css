@@ -168,4 +168,15 @@ body.admin-bar header {
   margin-bottom: 30px;
 }
 
+.process-pagination .page-num {
+  color: #b3b1a8;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.process-pagination .page-num.active {
+  color: #1c1b18;
+  font-weight: 600;
+}
+
 /*# sourceMappingURL=app.css.map */

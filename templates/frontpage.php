@@ -208,6 +208,68 @@ get_header();
             </div>
         </div>
     <?php endif; ?>
+    <?php if (have_rows('slider_04')) : ?>
+        <div class="w-full max-w-[1280px] mx-auto px-4 py-12">
+            <div class="flex justify-between items-start mb-12">
+                <h2 class="text-[48px] leading-[1.1] font-medium tracking-tight text-[#1c1b18] uppercase max-w-[500px]">
+                    <?php the_field('title_04'); ?>
+                </h2>
+                <span class="text-sm font-medium text-[#6e6c64]"><?php the_field('subtitle_04'); ?></span>
+            </div>
+
+            <div class="swiper process-text-slider mb-8">
+                <div class="swiper-wrapper">
+                    <?php while (have_rows('slider_04')) : the_row(); ?>
+                        <div class="swiper-slide">
+                            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                                <div class="lg:col-span-4 text-[15px] font-medium text-[#6e6c64]">
+                                    <?php the_sub_field('subtitle'); ?>
+                                </div>
+                                <div class="lg:col-span-5">
+                                    <h3 class="text-[28px] font-medium text-[#1c1b18] mb-4">
+                                        <?php the_sub_field('title'); ?>
+                                    </h3>
+                                    <p class="text-[16px] leading-relaxed text-[#5a5953]">
+                                        <?php the_sub_field('text'); ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endwhile; ?>
+
+                </div>
+            </div>
+            <div class="relative pt-6 pb-6 flex flex-wrap items-center justify-between gap-6">
+                <div class="flex items-center gap-6">
+                    <button class="process-prev w-12 h-12 rounded-full border border-[#1c1b18] flex items-center justify-center hover:bg-[#1c1b18] hover:text-white transition-colors">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+                    </button>
+
+                    <div class="process-pagination flex gap-4 text-[22px] font-medium"></div>
+
+                    <button class="process-next w-12 h-12 rounded-full border border-[#1c1b18] flex items-center justify-center hover:bg-[#1c1b18] hover:text-white transition-colors">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                    </button>
+                </div>
+
+                <a href="<?php the_field('button_link_04'); ?>" title="<?php the_field('button_title_04'); ?>" class="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#2a2825] text-white text-base font-medium hover:bg-[#1c1b18] transition-colors">
+                    <span><?php the_field('button_title_04'); ?></span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+            <div class="relative swiper-scrollbar process-scrollbar !mb-0 top-[1px]"></div>
+            <div class="swiper process-cards-slider overflow-hidden">
+                <div class="swiper-wrapper">
+                    <?php while (have_rows('slider_04')) : the_row(); ?>
+                        <div class="swiper-slide">
+                            <img src="<?php echo get_template_directory_uri() . '/assets/svg/bridge.svg'; ?>" alt="Bridge Item">
+                        </div>
+                    <?php endwhile; ?>
+                </div>
+            </div>
+
+        </div>
+    <?php endif; ?>
     <?php if (have_rows('slider_05')) : ?>
         <div class="w-full max-w-[1280px] mx-auto mt-[68px] px-4">
             <h2 class="text-[48px] uppercase font-medium">

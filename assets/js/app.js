@@ -49,6 +49,47 @@ jQuery(document).ready(function($) {
         },
     });
 
+    // Bridge slider
+    const cardsSlider = new Swiper('.process-cards-slider', {
+        slidesPerView: 1.5,
+        spaceBetween: 0,
+        speed: 600,
+        breakpoints: {
+            640: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 }
+        }
+    });
+
+    const textSlider = new Swiper('.process-text-slider', {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        speed: 500,
+
+        navigation: {
+            nextEl: '.process-next',
+            prevEl: '.process-prev',
+        },
+
+        pagination: {
+            el: '.process-pagination',
+            clickable: true,
+            bulletClass: 'page-num',
+            bulletActiveClass: 'active',
+            renderBullet: function (index, className) {
+                const num = (index + 1 < 10 ? '0' : '') + (index + 1);
+                return `<span class="${className}">${num}</span>`;
+            },
+        },
+
+        scrollbar: {
+            el: '.process-scrollbar',
+            draggable: true,
+        }
+    });
+
+    textSlider.controller.control = cardsSlider;
+    cardsSlider.controller.control = textSlider;
+
     // FAQs tabs
     let tab_window = $('[data-window]'),
         faq_question = $('[data-faq-question]');
