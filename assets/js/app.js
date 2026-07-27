@@ -52,7 +52,6 @@ jQuery(document).ready(function($) {
     // Bridge slider
     $(document).ready(function () {
 
-        // 1. Нижний слайдер (Арки моста)
         const cardsSlider = new Swiper('.process-cards-slider', {
             slidesPerView: 1.5,
             spaceBetween: 0,
@@ -70,7 +69,6 @@ jQuery(document).ready(function($) {
             }
         });
 
-        // 2. Верхний слайдер (Текст / Карточки)
         const textSlider = new Swiper('.process-text-slider', {
             slidesPerView: 1.15,
             spaceBetween: 12,
@@ -196,5 +194,43 @@ jQuery(document).ready(function($) {
 
         $answer.slideToggle(300);
         $symbol.text(isOpen ? '+' : '-');
+    });
+
+    // Mobile Menu Toggle
+    const $menuToggle = $('#mobile-menu-toggle');
+    const $mobileMenu = $('#mobile-menu');
+    const $body = $('body');
+
+    function openMobileMenu() {
+        $menuToggle.addClass('is-active').attr('aria-expanded', 'true');
+        $mobileMenu.addClass('is-open').removeClass('opacity-0 pointer-events-none -translate-y-4').addClass('opacity-100 pointer-events-auto translate-y-0');
+        $body.addClass('mobile-menu-open');
+    }
+
+    function closeMobileMenu() {
+        $menuToggle.removeClass('is-active').attr('aria-expanded', 'false');
+        $mobileMenu.removeClass('is-open opacity-100 pointer-events-auto translate-y-0').addClass('opacity-0 pointer-events-none -translate-y-4');
+        $body.removeClass('mobile-menu-open');
+    }
+
+    $menuToggle.on('click', function(e) {
+        e.stopPropagation();
+        if ($mobileMenu.hasClass('is-open')) {
+            closeMobileMenu();
+        } else {
+            openMobileMenu();
+        }
+    });
+
+    // Close menu on navigation link click
+    $mobileMenu.find('a').on('click', function() {
+        closeMobileMenu();
+    });
+
+    // Close menu on Escape key press
+    $(document).on('keydown', function(e) {
+        if (e.key === 'Escape' && $mobileMenu.hasClass('is-open')) {
+            closeMobileMenu();
+        }
     });
 });
