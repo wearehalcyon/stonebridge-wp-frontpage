@@ -4,6 +4,13 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
     require_once __DIR__ . '/vendor/autoload.php';
 }
 
+// WP settings
+add_action('after_setup_theme', function () {
+    add_theme_support('title-tag');
+
+    add_theme_support('post-thumbnails');
+});
+
 // Enqueue scripts and styles.
 function stonebridge_scripts() {
 	wp_enqueue_style( 'stonebridge-style', get_stylesheet_uri(), array(), '' );
@@ -13,10 +20,12 @@ function stonebridge_scripts() {
 	wp_enqueue_style( 'stonebridge-google-fonts', 'https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap', array(), null );
 
 	// Add main app styles
+	wp_enqueue_style( 'stonebridge-swiper-bundle', get_template_directory_uri() . '/assets/css/swiper-bundle.min.css?version=' . filemtime(get_template_directory() . '/assets/css/swiper-bundle.min.css') );
 	wp_enqueue_style( 'stonebridge-tailwind', get_template_directory_uri() . '/assets/css/tailwind.css?version=' . filemtime(get_template_directory() . '/assets/css/tailwind.css') );
 	wp_enqueue_style( 'stonebridge-app', get_template_directory_uri() . '/assets/scss/app.css?version=' . filemtime(get_template_directory() . '/assets/scss/app.css') );
 
 	// Add main app scripts
+	wp_enqueue_script( 'stonebridge-swiper-bundle', get_template_directory_uri() . '/assets/js/swiper-bundle.min.js?version=' . filemtime(get_template_directory() . '/assets/js/swiper-bundle.min.js'), array(), '', true );
 	wp_enqueue_script( 'stonebridge-app', get_template_directory_uri() . '/assets/js/app.js?version=' . filemtime(get_template_directory() . '/assets/js/app.js'), array(), '', true );
 }
 add_action( 'wp_enqueue_scripts', 'stonebridge_scripts' );
